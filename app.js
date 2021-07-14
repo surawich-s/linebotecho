@@ -17,12 +17,9 @@ const app = express();
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.get("/", (req, res) => {
-  res.send(config.channelAccessToken);
-});
 
-app.get("/test", (req, res) => {
-  res.send("hello");
+app.get("/", (req, res) => {
+  res.send("hello this is linebot test");
 });
 
 app.post("/callback", line.middleware(config), (req, res) => {
@@ -41,8 +38,10 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
+  console.log(event.message);
+
   // create a echoing text message
-  const echo = { type: "text", text: event.message.text };
+  const echo = { type: "text", text: "เออ กูบอท" };
 
   // use reply API
   return client.replyMessage(event.replyToken, echo);
