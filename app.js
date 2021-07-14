@@ -38,7 +38,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const nums = event.message.text.trim(" ").split("+");
-  const sum = Number(nums[0]) + Number(nums[1]);
+  const sum = { type: "text", text: Number(nums[0]) + Number(nums[1]) };
   return client.replyMessage(event.replyToken, sum);
 
   // create a echoing text message
