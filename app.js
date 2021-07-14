@@ -41,7 +41,7 @@ function handleEvent(event) {
   console.log(event.message);
 
   // create a echoing text message
-  const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส"];
+  const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
   const echo = {
     type: "text",
     text: textArray[Math.floor(Math.random() * textArray.length)],
