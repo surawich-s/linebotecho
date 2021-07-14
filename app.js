@@ -37,23 +37,18 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-
-  if (event.message.text.search("+") > -1) {
-    const nums = event.message.text.trim(" ").split("+");
-    const sum = Number(nums[0]) + Number(nums[1]);
-    return client.replyMessage(event.replyToken, sum);
-  } else {
-    const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
-    const echo = {
-      type: "text",
-      text: textArray[Math.floor(Math.random() * textArray.length)],
-    };
-
-    // use reply API
-    return client.replyMessage(event.replyToken, echo);
-  }
+  const nums = event.message.text.trim(" ").split("+");
+  const sum = Number(nums[0]) + Number(nums[1]);
+  return client.replyMessage(event.replyToken, sum);
 
   // create a echoing text message
+  // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
+  // const echo = {
+  //   type: "text",
+  //   text: textArray[Math.floor(Math.random() * textArray.length)],
+  // };
+  // use reply API
+  // return client.replyMessage(event.replyToken, sum);
 }
 
 // listen on port
