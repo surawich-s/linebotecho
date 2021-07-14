@@ -37,23 +37,7 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-  const string = event.message.text.trim(" ");
-  const operator = string[string.search(format)];
-  const nums = string.split(format);
-  const num1 = Number(nums[0]);
-  const num2 = Number(nums[1]);
-  let cal = 0;
-  switch (operator) {
-    case "+":
-      cal = num1 + num2;
-    case "-":
-      cal = num1 - num2;
-    case "/":
-      cal = num1 / num2;
-    case "*":
-      cal = num1 * num2;
-  }
+  const cal = eval.event.message.text;
 
   const message = { type: "text", text: cal };
   return client.replyMessage(event.replyToken, message);
