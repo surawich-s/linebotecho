@@ -37,7 +37,7 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const cal = eval.event.message.text;
+  const cal = eval(event.message.text.trim(" "));
 
   const message = { type: "text", text: cal };
   return client.replyMessage(event.replyToken, message);
