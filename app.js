@@ -37,9 +37,24 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const nums = event.message.text.trim(" ").split("+");
-  const sum = { type: "text", text: Number(nums[0]) + Number(nums[1]) };
-  return client.replyMessage(event.replyToken, sum);
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+  const nums = event.message.text.trim(" ").split(format);
+  const num1 = Number(nums[0]);
+  const num2 = Number(nums[1]);
+  let cal = 0;
+  switch (nums[2]) {
+    case "+":
+      cal = num1 + num2;
+    case "-":
+      cal = num1 - num2;
+    case "/":
+      cal = num1 / num2;
+    case "*":
+      cal = num1 * num2;
+  }
+
+  const message = { type: "text", text: cal };
+  return client.replyMessage(event.replyToken, message);
 
   // create a echoing text message
   // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
