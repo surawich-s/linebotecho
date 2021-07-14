@@ -38,7 +38,9 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  console.log(event.message);
+  if (event.source.roomId) {
+    return client.replyMessage(event.replyToken, event.source.roomId);
+  }
 
   // create a echoing text message
   const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
