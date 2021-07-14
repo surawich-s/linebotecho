@@ -40,7 +40,7 @@ function handleEvent(event) {
 
   if (event.message.text.search("+") > -1) {
     const nums = event.message.text.trim(" ").split("+");
-    const sum = nums[0] + nums[1];
+    const sum = Number(nums[0]) + Number(nums[1]);
     return client.replyMessage(event.replyToken, sum);
   } else {
     const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
