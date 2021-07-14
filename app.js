@@ -38,8 +38,10 @@ function handleEvent(event) {
   //   return Promise.resolve(null);
   // }
 
-  if (event.source.roomId) {
-    return client.replyMessage(event.replyToken, event.source.roomId);
+  if (event.message.text.search("+") > -1) {
+    const nums = event.message.text.trim(" ").split("+");
+    const sum = nums[0] + nums[1];
+    return client.replyMessage(event.replyToken, sum);
   }
 
   // create a echoing text message
