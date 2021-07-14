@@ -38,7 +38,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-  const nums = event.message.text.trim(" ").split("");
+  const nums = event.message.text.trim(" ");
   const num1 = Number(nums[0]);
   const num2 = Number(nums[2]);
   let cal = 0;
