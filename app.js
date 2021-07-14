@@ -41,7 +41,11 @@ function handleEvent(event) {
   console.log(event.message);
 
   // create a echoing text message
-  const echo = { type: "text", text: "เออ กูบอท" };
+  const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส"];
+  const echo = {
+    type: "text",
+    text: textArray[Math.floor(Math.random() * textArray.length)],
+  };
 
   // use reply API
   return client.replyMessage(event.replyToken, echo);
