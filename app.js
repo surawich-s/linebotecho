@@ -38,11 +38,13 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-  const nums = event.message.text.trim(" ");
+  const string = event.message.text.trim(" ");
+  const operator = string[string.search(format)];
+  const nums = string.split(format);
   const num1 = Number(nums[0]);
-  const num2 = Number(nums[2]);
+  const num2 = Number(nums[1]);
   let cal = 0;
-  switch (nums[1]) {
+  switch (operator) {
     case "+":
       cal = num1 + num2;
     case "-":
