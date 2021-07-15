@@ -37,10 +37,13 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const cal = eval(event.message.text.trim(" "));
 
-  const message = { type: "text", text: cal };
+  const message = { type: "text", text: event.message.source.userId };
   return client.replyMessage(event.replyToken, message);
+  // const cal = eval(event.message.text.trim(" "));
+
+  // const message = { type: "text", text: cal };
+  // return client.replyMessage(event.replyToken, message);
 
   // create a echoing text message
   // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
