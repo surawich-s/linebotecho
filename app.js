@@ -35,7 +35,7 @@ const configLottoApi = {
   url: `https://api.krupreecha.com/${dateToLotto}`,
   headers: {
     "Content-Type": "application/json",
-    "x-api-key": "5e7a91f6fa6baa67a4930c36c4e2981d",
+    "x-api-key": process.env.LOTTO_API_KEY,
   },
   // data: data,
 };
@@ -81,12 +81,7 @@ function handleEvent(event) {
   } else if (event.message.text.toLowerCase() == "check") {
     const message = {
       type: "text",
-      text:
-        "userId: " +
-        event.source.userId +
-        " " +
-        "roomId: " +
-        event.source.roomId,
+      text: "userId: " + event.source.userId,
     };
     return client.replyMessage(event.replyToken, message);
   } else if (
@@ -115,12 +110,6 @@ function handleEvent(event) {
         });
       });
   } else if (event.message.text.search("สุ่ม") > -1) {
-    // create a echoing text message
-    // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
-    // const randomText = {
-    //   type: "text",
-    //   text: textArray[Math.floor(Math.random() * textArray.length)],
-    // };
     let maxNum = 100;
     const res = Number(event.message.text.split(" ")[1] - 1);
     if (res) {
