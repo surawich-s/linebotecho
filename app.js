@@ -101,9 +101,9 @@ function handleEvent(event) {
           String(date.getDate() > 15 ? "16" : "1") +
           " " +
           result +
-          "\nรางวัลที่ 1 : " +
+          "\n\nรางวัลที่ 1 : " +
           lottoReward[0].number +
-          "\nเลขท้าย 2 ตัว : " +
+          "\n\nเลขท้าย 2 ตัว : " +
           lottoReward[3].number;
         const message = { type: "text", text: text };
         return client.replyMessage(event.replyToken, message);
@@ -111,15 +111,24 @@ function handleEvent(event) {
       .catch(function (error) {
         return client.replyMessage(event.replyToken, {
           type: "text",
-          text: "หวยยังไม่ออก",
+          text: "หวยยังไม่ออก รีบไปไหนวะ",
         });
       });
-  } else if (event.message.text == "สุ่ม") {
+  } else if (event.message.text.search("สุ่ม") > -1) {
     // create a echoing text message
-    const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
+    // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
+    // const randomText = {
+    //   type: "text",
+    //   text: textArray[Math.floor(Math.random() * textArray.length)],
+    // };
+    let maxNum = 100;
+    const res = Number(str.split(" ")[1] - 1);
+    if (res) {
+      maxNum = res;
+    }
     const randomText = {
       type: "text",
-      text: textArray[Math.floor(Math.random() * textArray.length)],
+      text: "สุ่มได้ " + String(Math.floor(Math.random() * maxNum)),
     };
     // use reply API
     return client.replyMessage(event.replyToken, randomText);
