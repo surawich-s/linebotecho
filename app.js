@@ -60,9 +60,12 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  const keywords = ["หวย", "สลาก", "ตรวจ"];
+  const keywordsLotto = ["หวย", "สลาก", "ตรวจ"];
+  const keywordsHelloBot = ["สวัสดี", "บอท", "ทัก"];
 
-  if (event.message.text == "สวัสดีบอท") {
+  if (
+    keywordsHelloBot.some((keyword) => event.message.text.includes(keyword))
+  ) {
     client
       .getProfile(event.source.userId)
       .then((profile) => {
@@ -86,7 +89,9 @@ function handleEvent(event) {
         event.source.roomId,
     };
     return client.replyMessage(event.replyToken, message);
-  } else if (keywords.some((keyword) => event.message.text.includes(keyword))) {
+  } else if (
+    keywordsLotto.some((keyword) => event.message.text.includes(keyword))
+  ) {
     axios(configLottoApi)
       .then(function (response) {
         console.log(JSON.stringify(response.data.result[0]));
