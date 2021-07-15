@@ -38,7 +38,20 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  if (event.message.text == "check") {
+  if (event.message.text == "test") {
+    client
+      .getProfile(event.source.userId)
+      .then((profile) => {
+        const message = {
+          type: "text",
+          text: "ว่าไง " + profile.displayName,
+        };
+        return client.replyMessage(event.replyToken, message);
+      })
+      .catch((err) => {
+        console.log(error);
+      });
+  } else if (event.message.text == "check") {
     const message = {
       type: "text",
       text:
