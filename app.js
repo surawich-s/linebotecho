@@ -38,15 +38,18 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  const message = {
-    type: "text",
-    text: event.source.userId + " " + event.source.roomId,
-  };
-  return client.replyMessage(event.replyToken, message);
-  // const cal = eval(event.message.text.trim(" "));
+  if (event.message.text == "check") {
+    const message = {
+      type: "text",
+      text: event.source.userId + " " + event.source.roomId,
+    };
+    return client.replyMessage(event.replyToken, message);
+  } else {
+    const cal = eval(event.message.text.trim(" "));
 
-  // const message = { type: "text", text: cal };
-  // return client.replyMessage(event.replyToken, message);
+    const message = { type: "text", text: cal };
+    return client.replyMessage(event.replyToken, message);
+  }
 
   // create a echoing text message
   // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
