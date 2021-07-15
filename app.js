@@ -1,6 +1,7 @@
 require("dotenv").config();
 const line = require("@line/bot-sdk");
 const express = require("express");
+const axios = require(axios);
 
 // create LINE SDK config from env variables
 const config = {
@@ -17,6 +18,23 @@ const app = express();
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
+
+const date = new Date();
+const dateToLotto =
+  String(date.getDate() > 15 ? "16" : "01") +
+  (date.getMonth() > 9 ? "" : "0") +
+  String(date.getMonth()) +
+  String(date.getFullYear() + 543);
+
+var configLottoApi = {
+  method: "post",
+  url: `https://api.krupreecha.com/${dateToLotto}`,
+  headers: {
+    "Content-Type": "application/json",
+    "x-api-key": "5e7a91f6fa6baa67a4930c36c4e2981d",
+  },
+  data: data,
+};
 
 app.get("/", (req, res) => {
   res.send("hello this is linebot test");
@@ -62,6 +80,14 @@ function handleEvent(event) {
         event.source.roomId,
     };
     return client.replyMessage(event.replyToken, message);
+  } else if (event.message.text == "หวย") {
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   } else if (event.message.text == "สุ่ม") {
     // create a echoing text message
     const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
