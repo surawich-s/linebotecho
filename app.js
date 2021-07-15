@@ -38,7 +38,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  const message = { type: "text", text: event.message.source.userId };
+  const message = { type: "text", text: event.source.userId };
   return client.replyMessage(event.replyToken, message);
   // const cal = eval(event.message.text.trim(" "));
 
