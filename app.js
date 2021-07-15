@@ -23,7 +23,7 @@ const date = new Date();
 const dateToLotto =
   String(date.getDate() > 15 ? "16" : "01") +
   (date.getMonth() > 9 ? "" : "0") +
-  String(date.getMonth()) +
+  String(date.getMonth() + 1) +
   String(date.getFullYear() + 543);
 
 var configLottoApi = {
