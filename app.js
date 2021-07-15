@@ -44,21 +44,21 @@ function handleEvent(event) {
       text: event.source.userId + " " + event.source.roomId,
     };
     return client.replyMessage(event.replyToken, message);
+  } else if (event.message.text == "สุ่ม") {
+    // create a echoing text message
+    const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
+    const randomText = {
+      type: "text",
+      text: textArray[Math.floor(Math.random() * textArray.length)],
+    };
+    // use reply API
+    return client.replyMessage(event.replyToken, randomText);
   } else {
     const cal = eval(event.message.text.trim(" "));
 
     const message = { type: "text", text: cal };
     return client.replyMessage(event.replyToken, message);
   }
-
-  // create a echoing text message
-  // const textArray = ["โกโก้", "ดุอิคุงกิ", "โยนาส", "แบล็กโฮลเท่านั้น"];
-  // const echo = {
-  //   type: "text",
-  //   text: textArray[Math.floor(Math.random() * textArray.length)],
-  // };
-  // use reply API
-  // return client.replyMessage(event.replyToken, sum);
 }
 
 // listen on port
