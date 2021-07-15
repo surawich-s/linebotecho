@@ -33,7 +33,7 @@ var configLottoApi = {
     "Content-Type": "application/json",
     "x-api-key": "5e7a91f6fa6baa67a4930c36c4e2981d",
   },
-  data: data,
+  // data: data,
 };
 
 app.get("/", (req, res) => {
@@ -81,7 +81,7 @@ function handleEvent(event) {
     };
     return client.replyMessage(event.replyToken, message);
   } else if (event.message.text == "หวย") {
-    axios(config)
+    axios(configLottoApi)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
       })
