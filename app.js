@@ -51,7 +51,7 @@ function handleEvent(event) {
       .catch((err) => {
         console.log(error);
       });
-  } else if (event.message.text == "check") {
+  } else if (event.message.text.toLowerCase() == "check") {
     const message = {
       type: "text",
       text:
