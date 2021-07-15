@@ -91,7 +91,7 @@ function handleEvent(event) {
         const lottoReward = response.data.result;
         const text =
           "งวดที่ " +
-          String(date.getDate() > 15 ? "16" : "01") +
+          String(date.getDate() > 15 ? "16" : "1") +
           " " +
           result +
           "\nรางวัลที่ 1 : " +
