@@ -83,7 +83,7 @@ function handleEvent(event) {
   } else if (event.message.text == "หวย") {
     axios(configLottoApi)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data.result[0]));
       })
       .catch(function (error) {
         console.log(error);
