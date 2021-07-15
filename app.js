@@ -122,7 +122,7 @@ function handleEvent(event) {
     //   text: textArray[Math.floor(Math.random() * textArray.length)],
     // };
     let maxNum = 100;
-    const res = Number(str.split(" ")[1] - 1);
+    const res = Number(event.message.text.split(" ")[1] - 1);
     if (res) {
       maxNum = res;
     }
