@@ -30,7 +30,7 @@ const dateToLotto =
   String(date.getMonth() + 1) +
   String(date.getFullYear() + 543);
 
-var configLottoApi = {
+const configLottoApi = {
   method: "post",
   url: `https://api.krupreecha.com/${dateToLotto}`,
   headers: {
@@ -60,6 +60,8 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
 
+  const keywords = ["หวย", "สลาก", "ตรวจ"];
+
   if (event.message.text == "สวัสดีบอท") {
     client
       .getProfile(event.source.userId)
@@ -84,7 +86,7 @@ function handleEvent(event) {
         event.source.roomId,
     };
     return client.replyMessage(event.replyToken, message);
-  } else if (event.message.text == "หวย") {
+  } else if (keywords.some((keyword) => event.message.text.includes(keyword))) {
     axios(configLottoApi)
       .then(function (response) {
         console.log(JSON.stringify(response.data.result[0]));
@@ -102,7 +104,10 @@ function handleEvent(event) {
         return client.replyMessage(event.replyToken, message);
       })
       .catch(function (error) {
-        console.log(error);
+        return client.replyMessage(event.replyToken, {
+          type: "text",
+          text: "หวยยังไม่ออก",
+        });
       });
   } else if (event.message.text == "สุ่ม") {
     // create a echoing text message
