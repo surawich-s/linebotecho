@@ -20,6 +20,11 @@ const app = express();
 // about the middleware, please refer to doc
 
 const date = new Date();
+const result = date.toLocaleDateString("th-TH", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 const dateToLotto =
   String(date.getDate() > 15 ? "16" : "01") +
   (date.getMonth() > 9 ? "" : "0") +
@@ -87,7 +92,7 @@ function handleEvent(event) {
         const lottoReward = response.data.result;
         const text =
           "งวดที่ " +
-          dateToLotto +
+          result +
           "\nรางวัลที่ 1 : " +
           lottoReward[0].number +
           "\nเลขท้าย 2 ตัว : " +
