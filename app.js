@@ -1,7 +1,7 @@
 require("dotenv").config();
 const line = require("@line/bot-sdk");
 const express = require("express");
-const axios = require(axios);
+const axios = require("axios");
 
 // create LINE SDK config from env variables
 const config = {
