@@ -41,7 +41,12 @@ function handleEvent(event) {
   if (event.message.text == "check") {
     const message = {
       type: "text",
-      text: event.source.userId + " " + event.source.roomId,
+      text:
+        "userId: " +
+        event.source.userId +
+        " " +
+        "roomId: " +
+        event.source.roomId,
     };
     return client.replyMessage(event.replyToken, message);
   } else if (event.message.text == "สุ่ม") {
