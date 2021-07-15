@@ -85,11 +85,10 @@ function handleEvent(event) {
       .then(function (response) {
         console.log(JSON.stringify(response.data.result[0]));
         const lottoReward = response.data.result;
-        const text =
-          "รางวัลที่ 1 : " +
+        const text = "งวดที่ " + dateToLotto;
+        "\nรางวัลที่ 1 : " +
           lottoReward[0].number +
-          "\n" +
-          "เลขท้าย 2 ตัว : " +
+          "\nเลขท้าย 2 ตัว : " +
           lottoReward[3].number;
         const message = { type: "text", text: text };
         return client.replyMessage(event.replyToken, message);
