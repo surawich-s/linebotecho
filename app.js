@@ -59,6 +59,15 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
+  let user = "";
+  client
+    .getProfile(event.source.userId)
+    .then((profile) => {
+      user = profile.displayName;
+    })
+    .catch((err) => {
+      console.log(error);
+    });
 
   const keywordsLotto = ["หวย", "สลาก", "ตรวจ"];
   const keywordsHelloBot = ["สวัสดี", "บอท", "ทัก"];
@@ -66,18 +75,11 @@ function handleEvent(event) {
   if (
     keywordsHelloBot.some((keyword) => event.message.text.includes(keyword))
   ) {
-    client
-      .getProfile(event.source.userId)
-      .then((profile) => {
-        const message = {
-          type: "text",
-          text: "ว่าไง " + profile.displayName,
-        };
-        return client.replyMessage(event.replyToken, message);
-      })
-      .catch((err) => {
-        console.log(error);
-      });
+    const message = {
+      type: "text",
+      text: "ว่าไง " + user,
+    };
+    return client.replyMessage(event.replyToken, message);
   } else if (event.message.text.toLowerCase() == "check") {
     const message = {
       type: "text",
@@ -98,7 +100,9 @@ function handleEvent(event) {
             String(date.getDate() > 15 ? "16" : "01") +
             " " +
             result +
-            " ยังไม่ออกนะ\n\nตอนนี้มีแค่\n\n";
+            " ยังไม่ออกนะคะ คุณ " +
+            user +
+            "\n\nตอนนี้มีแค่\n\n";
         }
         const lottoReward = response.data.result;
         const text =
