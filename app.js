@@ -89,10 +89,22 @@ function handleEvent(event) {
   ) {
     axios(configLottoApi)
       .then(function (response) {
-        console.log(JSON.stringify(response.data.result[0]));
+        const drawDate = response.data.drawdate;
+        const lottoDay = drawDate.split(" ")[0];
+        let noLottoToday = "";
+        if (lottoDay !== String(date.getDate() > 15 ? "16" : "01")) {
+          noLottoToday =
+            "งวดที่ " +
+            String(date.getDate() > 15 ? "16" : "01") +
+            result +
+            "ยังไม่ออกนะ\n\n";
+        }
         const lottoReward = response.data.result;
-        const text = "งวดที่ " + response.data.drawdate;
-        "\n\nรางวัลที่ 1 : " +
+        const text =
+          noLottoToday +
+          "งวดที่ " +
+          drawDate +
+          "\n\nรางวัลที่ 1 : " +
           lottoReward[0].number +
           "\n\nเลขท้าย 2 ตัว : " +
           lottoReward[3].number;
