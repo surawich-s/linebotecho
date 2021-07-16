@@ -96,8 +96,9 @@ function handleEvent(event) {
           noLottoToday =
             "งวดที่ " +
             String(date.getDate() > 15 ? "16" : "01") +
+            " " +
             result +
-            "ยังไม่ออกนะ\n\n";
+            "ยังไม่ออกนะ\n\nตอนนี้มีแค่\n\n";
         }
         const lottoReward = response.data.result;
         const text =
@@ -112,10 +113,7 @@ function handleEvent(event) {
         return client.replyMessage(event.replyToken, message);
       })
       .catch(function (error) {
-        return client.replyMessage(event.replyToken, {
-          type: "text",
-          text: "หวยยังไม่ออก รีบไปไหนวะ",
-        });
+        console.log(error);
       });
   } else if (event.message.text.search("สุ่ม") > -1) {
     let maxNum = 100;
