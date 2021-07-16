@@ -66,78 +66,78 @@ function handleEvent(event) {
     .getProfile(event.source.userId)
     .then((profile) => {
       user = profile.displayName;
+      if (
+        keywordsHelloBot.some((keyword) => event.message.text.includes(keyword))
+      ) {
+        const text = "ว่าไง " + user;
+        const message = {
+          type: "text",
+          text: text,
+        };
+        return client.replyMessage(event.replyToken, message);
+      } else if (event.message.text.toLowerCase() == "check") {
+        const message = {
+          type: "text",
+          text: "userId: " + event.source.userId,
+        };
+        return client.replyMessage(event.replyToken, message);
+      } else if (
+        keywordsLotto.some((keyword) => event.message.text.includes(keyword))
+      ) {
+        axios(configLottoApi)
+          .then(function (response) {
+            const drawDate = response.data.drawdate;
+            const lottoDay = drawDate.split(" ")[0];
+            let noLottoToday = "";
+            if (lottoDay !== String(date.getDate() > 15 ? "16" : "01")) {
+              noLottoToday =
+                "งวดที่ " +
+                String(date.getDate() > 15 ? "16" : "01") +
+                " " +
+                result +
+                " ยังไม่ออกนะคะ คุณ " +
+                user +
+                "\n\nตอนนี้มีแค่\n\n";
+            }
+            const lottoReward = response.data.result;
+            const text =
+              noLottoToday +
+              "งวดที่ " +
+              drawDate +
+              "\n\nรางวัลที่ 1 : " +
+              lottoReward[0].number +
+              "\n\nเลขท้าย 2 ตัว : " +
+              lottoReward[3].number;
+            const message = { type: "text", text: text };
+            return client.replyMessage(event.replyToken, message);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else if (event.message.text.search("สุ่ม") > -1) {
+        let maxNum = 100;
+        const res = Number(event.message.text.split(" ")[1] - 1);
+        if (res) {
+          maxNum = res;
+        }
+        const randomText = {
+          type: "text",
+          text: "สุ่มได้ " + String(Math.floor(Math.random() * maxNum)),
+        };
+        // use reply API
+        return client.replyMessage(event.replyToken, randomText);
+      } else {
+        const cal = eval(event.message.text.trim(" "));
+    
+        const message = { type: "text", text: cal };
+        return client.replyMessage(event.replyToken, message);
+      }
     })
     .catch((err) => {
       console.log(error);
     });
 
-  if (
-    keywordsHelloBot.some((keyword) => event.message.text.includes(keyword))
-  ) {
-    const text = "ว่าไง " + user;
-    const message = {
-      type: "text",
-      text: text,
-    };
-    return client.replyMessage(event.replyToken, message);
-  } else if (event.message.text.toLowerCase() == "check") {
-    const message = {
-      type: "text",
-      text: "userId: " + event.source.userId,
-    };
-    return client.replyMessage(event.replyToken, message);
-  } else if (
-    keywordsLotto.some((keyword) => event.message.text.includes(keyword))
-  ) {
-    axios(configLottoApi)
-      .then(function (response) {
-        const drawDate = response.data.drawdate;
-        const lottoDay = drawDate.split(" ")[0];
-        let noLottoToday = "";
-        if (lottoDay !== String(date.getDate() > 15 ? "16" : "01")) {
-          noLottoToday =
-            "งวดที่ " +
-            String(date.getDate() > 15 ? "16" : "01") +
-            " " +
-            result +
-            " ยังไม่ออกนะคะ คุณ " +
-            user +
-            "\n\nตอนนี้มีแค่\n\n";
-        }
-        const lottoReward = response.data.result;
-        const text =
-          noLottoToday +
-          "งวดที่ " +
-          drawDate +
-          "\n\nรางวัลที่ 1 : " +
-          lottoReward[0].number +
-          "\n\nเลขท้าย 2 ตัว : " +
-          lottoReward[3].number;
-        const message = { type: "text", text: text };
-        return client.replyMessage(event.replyToken, message);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  } else if (event.message.text.search("สุ่ม") > -1) {
-    let maxNum = 100;
-    const res = Number(event.message.text.split(" ")[1] - 1);
-    if (res) {
-      maxNum = res;
-    }
-    const randomText = {
-      type: "text",
-      text: "สุ่มได้ " + String(Math.floor(Math.random() * maxNum)),
-    };
-    // use reply API
-    return client.replyMessage(event.replyToken, randomText);
-  } else {
-    const cal = eval(event.message.text.trim(" "));
-
-    const message = { type: "text", text: cal };
-    return client.replyMessage(event.replyToken, message);
-  }
-}
+  
 
 // listen on port
 const port = process.env.PORT || 3000;
