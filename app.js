@@ -106,6 +106,10 @@ function handleEvent(event) {
               drawDate +
               "\n\nรางวัลที่ 1 : " +
               lottoReward[0].number +
+              "\n\nเลขท้าย 3 ตัว : " +
+              lottoReward[2].number[0] +
+              ", " +
+              lottoReward[2].number[1] +
               "\n\nเลขท้าย 2 ตัว : " +
               lottoReward[3].number;
             const message = { type: "text", text: text };
