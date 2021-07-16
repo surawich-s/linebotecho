@@ -98,7 +98,7 @@ function handleEvent(event) {
             String(date.getDate() > 15 ? "16" : "01") +
             " " +
             result +
-            "ยังไม่ออกนะ\n\nตอนนี้มีแค่\n\n";
+            " ยังไม่ออกนะ\n\nตอนนี้มีแค่\n\n";
         }
         const lottoReward = response.data.result;
         const text =
