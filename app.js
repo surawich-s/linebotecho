@@ -91,12 +91,8 @@ function handleEvent(event) {
       .then(function (response) {
         console.log(JSON.stringify(response.data.result[0]));
         const lottoReward = response.data.result;
-        const text =
-          "งวดที่ " +
-          String(date.getDate() > 15 ? "16" : "1") +
-          " " +
-          result +
-          "\n\nรางวัลที่ 1 : " +
+        const text = "งวดที่ " + lottoReward.drawdate;
+        "\n\nรางวัลที่ 1 : " +
           lottoReward[0].number +
           "\n\nเลขท้าย 2 ตัว : " +
           lottoReward[3].number;
