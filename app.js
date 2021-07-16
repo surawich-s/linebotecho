@@ -128,7 +128,7 @@ function handleEvent(event) {
         return client.replyMessage(event.replyToken, randomText);
       } else {
         const cal = eval(event.message.text.trim(" "));
-    
+
         const message = { type: "text", text: cal };
         return client.replyMessage(event.replyToken, message);
       }
@@ -136,8 +136,7 @@ function handleEvent(event) {
     .catch((err) => {
       console.log(error);
     });
-
-  
+}
 
 // listen on port
 const port = process.env.PORT || 3000;
