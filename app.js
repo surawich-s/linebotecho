@@ -59,6 +59,8 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
+  const keywordsLotto = ["หวย", "สลาก", "ตรวจ"];
+  const keywordsHelloBot = ["สวัสดี", "บอท", "ทัก"];
   let user = "";
   client
     .getProfile(event.source.userId)
@@ -69,15 +71,13 @@ function handleEvent(event) {
       console.log(error);
     });
 
-  const keywordsLotto = ["หวย", "สลาก", "ตรวจ"];
-  const keywordsHelloBot = ["สวัสดี", "บอท", "ทัก"];
-
   if (
     keywordsHelloBot.some((keyword) => event.message.text.includes(keyword))
   ) {
+    const text = "ว่าไง " + user;
     const message = {
       type: "text",
-      text: "ว่าไง " + user,
+      text: text,
     };
     return client.replyMessage(event.replyToken, message);
   } else if (event.message.text.toLowerCase() == "check") {
