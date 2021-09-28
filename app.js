@@ -32,7 +32,7 @@ const dateToLotto =
 
 const configLottoApi = {
   method: "post",
-  url: `https://api.krupreecha.com/${dateToLotto}`,
+  url: `https://www.krupreecha.com/api/${dateToLotto}`,
   headers: {
     "Content-Type": "application/json",
     "x-api-key": process.env.LOTTO_API_KEY,
