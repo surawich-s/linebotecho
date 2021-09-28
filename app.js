@@ -26,7 +26,7 @@ const result = date.toLocaleDateString("th-TH", {
 });
 const dateToLotto =
   String(date.getDate() > 15 ? "16" : "01") +
-  (date.getMonth() > 9 ? "" : "0") +
+  String(date.getMonth() > 9 ? "" : "0") +
   String(date.getMonth() + 1) +
   String(date.getFullYear() + 543);
 
